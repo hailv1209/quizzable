@@ -1,0 +1,6 @@
+wordnet
+punkt
+punkt_tab
+brown
+omw-1.4
+stopwords
