@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <p class="img">
+                <img id="img" src="../static/images/QUIZZABLE.png" alt="">
+            </p>
+            <h1>Upload PDF to Generate MCQs</h1>
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
+                <div class="cardupload">
+                    <h3>Upload Files</h3>
+                    <div class="drop_box">
+                        <header>
+                            <h4>Select File here</h4>
+                        </header>
+                        <p>Files Supported: PDF</p>
+                        <input type="file" name="pdf_file" accept=".pdf" id="fileID" required>
+                        <p>How many Question do you want to generate?</p>
+                        <input type="number" name="num_questions" value="5" min="1" max="100" required>
+                        <!-- New selection box for question types -->
+                        <p>Select Question Type:</p>
+                        <select name="question_type" id="questionType" required>
+                            <option value="fill_in_blank">Fill in the Blank Questions</option>
+                            <option value="multiple_choice">Multiple Choice Questions</option>
+                        </select>
+                    </div>
+                    <div class="ans-btn-container">
+                        <button class="answer-btn" type="submit">Upload</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="loader-container" id="loaderContainer">
+            <div class="loader"></div>
+        </div>
+    </main>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+            document.getElementById('loaderContainer').style.display = 'flex';
+
+            // Simulate form submission (replace with actual form submission logic)
+            setTimeout(function () {
+                document.getElementById('uploadForm').submit(); // Submit the form after showing loader
+            }, 1000); // Simulate 1 second delay, replace with actual AJAX or server-side logic
+        });
+    </script>
+</body>
+
+</html>
