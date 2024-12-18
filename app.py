@@ -303,22 +303,12 @@ def generate_question(context,num_questions):
   summary_text = summarizer(context,summary_model,summary_tokenizer)
   # np = getnounphrases(summary_text,sentence_transformer_model,3)
   np =  get_keywords(context,summary_text,num_questions)
-  output=""
   for answer in np:
     ques = get_question(summary_text,answer,question_model,question_tokenizer)
     distractors = get_distractors_wordnet(answer)
-   
-    # output= output + ques + "\n" + "Ans: "+answer.capitalize() + "\n\n"
-    output = output + "<b style='color:blue;'>" + ques + "</b>"
-    output = output + "<br>"
-    output = output + "<b style='color:green;'>" + "Ans: " +answer.capitalize()+  "</b>"+"<br>"
-    if len(distractors)>0:
-      for distractor in distractors[:4]:
-        output = output + "<b style='color:brown;'>" + distractor+  "</b>"+"<br>"
-    output = output + "<br>"
     
     # Calculate the correct answer (A, B, C, D, etc.)
-    distractors = distractors[:4]
+    distractors = distractors[:3]
     distractors.append(answer) 
     # # Optionally shuffle the distractors if needed
     random.shuffle(distractors)
@@ -394,4 +384,5 @@ def questions():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    app.run(host="0.0.0.0", port=port, debug=False)  # Ensure host is 0.0.0.0
